@@ -1,0 +1,4 @@
+root = true
+
+[*.{cs,sln,csproj}]
+indent_style = tab
