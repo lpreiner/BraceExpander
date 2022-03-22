@@ -39,6 +39,8 @@ namespace BraceExpander.Tests
 		[InlineData("{1..2}", "1", "2")]
 		[InlineData("{01..2}", "01", "02")]
 		[InlineData("{1..02}", "01", "02")]
+		[InlineData("{00..2}", "00", "01", "02")]
+		[InlineData("{02..000}", "002", "001", "000")]
 		[InlineData("{0001..002}", "0001", "0002")]
 		[InlineData("{009..010}", "009", "010")]
 		public void ZeroPaddingIsRespected(string expression, params object[] expectedResults)
@@ -94,6 +96,7 @@ namespace BraceExpander.Tests
 
 			Assert.Equal(100, results.Count());
 		}
+
 
 		#region Helpers
 
