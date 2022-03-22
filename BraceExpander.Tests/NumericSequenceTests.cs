@@ -46,7 +46,7 @@ namespace BraceExpander.Tests
 			var results = BraceExpander.Expand(expression);
 
 			Assert.Collection(results, expectedResults
-				.Select(x => (string y) => Assert.Equal(x, y))
+				.Select(x => (Action<string>)(y => Assert.Equal(x, y)))
 				.ToArray());
 		}
 
@@ -59,7 +59,7 @@ namespace BraceExpander.Tests
 			var results = BraceExpander.Expand(expression);
 
 			Assert.Collection(results, expectedResults
-				.Select(x => (string y) => Assert.Equal(x, y))
+				.Select(x => (Action<string>)(y => Assert.Equal(x, y)))
 				.ToArray());
 		}
 
@@ -83,7 +83,7 @@ namespace BraceExpander.Tests
 			var results = BraceExpander.Expand(expression);
 
 			Assert.Collection(results, expectedResults
-				.Select(x => (string y) => Assert.Equal(x, y))
+				.Select(x => (Action<string>)(y => Assert.Equal(x, y)))
 				.ToArray());
 		}
 
@@ -94,7 +94,6 @@ namespace BraceExpander.Tests
 
 			Assert.Equal(100, results.Count());
 		}
-
 
 		#region Helpers
 
