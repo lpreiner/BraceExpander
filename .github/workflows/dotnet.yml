@@ -22,4 +22,4 @@ jobs:
     - name: Pack
       run: dotnet pack --no-build --configuration Release -o __out
     - name: Push
-      run: dotnet nuget push "./__out/*.nupkg" --source https://www.nuget.org --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
+      run: dotnet nuget push "./__out/*.nupkg" --source https://www.nuget.org --no-symbols --api-key ${{secrets.NUGET_TOKEN}}
