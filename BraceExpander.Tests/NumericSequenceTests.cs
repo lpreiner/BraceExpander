@@ -39,6 +39,8 @@ namespace BraceExpander.Tests
 		[InlineData("{1..2}", "1", "2")]
 		[InlineData("{01..2}", "01", "02")]
 		[InlineData("{1..02}", "01", "02")]
+		[InlineData("{0..10..5}", "0", "5", "10")]
+		[InlineData("{10..00..5}", "10", "05", "00")]
 		[InlineData("{00..2}", "00", "01", "02")]
 		[InlineData("{02..000}", "002", "001", "000")]
 		[InlineData("{0001..002}", "0001", "0002")]

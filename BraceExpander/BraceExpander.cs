@@ -66,7 +66,7 @@ namespace BraceExpander
 				if (start > end)
 					inc = -inc;
 
-				var format = rawStart.StartsWith('0') || (rawEnd.StartsWith('0') && end != 0)
+				var format = rawStart.StartsWith('0') && rawStart != "0" || (rawEnd.StartsWith('0') && rawEnd != "0")
 					? new string('0', Math.Max(rawStart.Length, rawEnd.Length))
 					: "0";
 
