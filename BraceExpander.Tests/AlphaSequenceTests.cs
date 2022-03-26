@@ -13,7 +13,7 @@ namespace BraceExpander.Tests
 		[InlineData("{Z..A}", 26)]
 		public void BasicAlphaSequencesHaveExpectedCounts(string expression, int expectedCount)
 		{
-			var results = BraceExpander.Expand(expression);
+			var results = Expander.Expand(expression);
 
 			Assert.Equal(expectedCount, results.Count());
 		}
@@ -25,7 +25,7 @@ namespace BraceExpander.Tests
 		[InlineData("{Z..AA}")]
 		public void MultipleLettersAreIgnored(string expression)
 		{
-			var results = BraceExpander.Expand(expression);
+			var results = Expander.Expand(expression);
 
 			Assert.Single(results);
 			Assert.Collection(results,
@@ -38,7 +38,7 @@ namespace BraceExpander.Tests
 		[InlineData("{a..e..2}", 3)]
 		public void AlphaSequenceWithIncrement(string expression, int expectedCount)
 		{
-			var results = BraceExpander.Expand(expression);
+			var results = Expander.Expand(expression);
 
 			Assert.Equal(expectedCount, results.Count());
 		}
@@ -47,7 +47,7 @@ namespace BraceExpander.Tests
 		[InlineData("{a..e..-1}", "a", "b", "c", "d", "e")]
 		public void NegativeIncrementCoallesced(string expression, params string[] expectedResults)
 		{
-			var results = BraceExpander.Expand(expression);
+			var results = Expander.Expand(expression);
 
 			Assert.Collection(results, expectedResults
 				.Select(x => (Action<string>)(y => Assert.Equal(x, y)))
@@ -57,7 +57,7 @@ namespace BraceExpander.Tests
 		[Fact]
 		public void ZeroLengthSequenceHasSingleValue()
 		{
-			var results = BraceExpander.Expand("{a..a}");
+			var results = Expander.Expand("{a..a}");
 
 			Assert.Single(results);
 			Assert.Collection(results,

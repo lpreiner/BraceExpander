@@ -13,7 +13,7 @@ namespace BraceExpander.Tests
 		[InlineData("{{{{a,b},c,{d..f}},g},h}", "a", "b", "c", "d", "e", "f", "g", "h")]
 		public void ComplexExpressionTest(string expression, params object[] expectedResults)
 		{
-			var results = BraceExpander.Expand(expression);
+			var results = Expander.Expand(expression);
 
 			Assert.Collection(results, expectedResults
 				.Select(x => (Action<string>)(y => Assert.Equal(x, y)))
@@ -24,7 +24,7 @@ namespace BraceExpander.Tests
 		[InlineData("{a,b,c}{1,2}", "a1", "a2", "b1", "b2", "c1", "c2")]
 		public void MultipleExpansions(string expression, params object[] expectedResults)
 		{
-			var results = BraceExpander.Expand(expression);
+			var results = Expander.Expand(expression);
 
 			Assert.Collection(results, expectedResults
 				.Select(x => (Action<string>)(y => Assert.Equal(x, y)))
@@ -37,7 +37,7 @@ namespace BraceExpander.Tests
 		[InlineData("{0..10..2}{A..z..2}{-100..-1..2}", 6 * 26 * 50)]
 		public void MultipleExpansionsHaveCorrectPermutationCount(string expression, int expectedResultCount)
 		{
-			var results = BraceExpander.Expand(expression);
+			var results = Expander.Expand(expression);
 
 			Assert.Equal(expectedResultCount, results.Count());
 		}

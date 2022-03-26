@@ -5,7 +5,11 @@ using System.Text.RegularExpressions;
 
 namespace BraceExpander
 {
-	public class BraceExpander
+	[Obsolete("The name of this class is at odds with .NET naming guidelines. Use Expander instead.  See issue #4")]
+	public class BraceExpander : Expander
+	{ }
+
+	public class Expander
 	{
 		const string ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 

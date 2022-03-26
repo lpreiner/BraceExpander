@@ -13,7 +13,7 @@ namespace BraceExpander.Tests
 		[InlineData("{12345}")]
 		public void SimpleInputHasSameOutput(string input)
 		{
-			var result = BraceExpander.Expand(input);
+			var result = Expander.Expand(input);
 
 			Assert.Single(result);
 			Assert.Collection(result,

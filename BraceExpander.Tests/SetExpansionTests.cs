@@ -7,7 +7,7 @@ namespace BraceExpander.Tests
 		[Fact]
 		public void BasicSetExpansionGivesExpectedResults()
 		{
-			var result = BraceExpander.Expand("{a,b,c}");
+			var result = Expander.Expand("{a,b,c}");
 
 			Assert.Collection(result,
 				x => Assert.Equal("a", x),
@@ -20,7 +20,7 @@ namespace BraceExpander.Tests
 		[InlineData("{{{{a,b,c},d,e},f},g}")]
 		public void NestedSetExpansion(string expression)
 		{
-			var result = BraceExpander.Expand(expression);
+			var result = Expander.Expand(expression);
 
 			Assert.Collection(result,
 				x => Assert.Equal("a", x),
@@ -35,7 +35,7 @@ namespace BraceExpander.Tests
 		[Fact]
 		public void EmptyElementExpansion()
 		{
-			var result = BraceExpander.Expand("{,a,b}");
+			var result = Expander.Expand("{,a,b}");
 
 			Assert.Collection(result,
 				x => Assert.Equal("", x),
@@ -46,7 +46,7 @@ namespace BraceExpander.Tests
 		[Fact]
 		public void EmptyElementLastExpansion()
 		{
-			var result = BraceExpander.Expand("{a,b,}");
+			var result = Expander.Expand("{a,b,}");
 
 			Assert.Collection(result,
 				x => Assert.Equal("a", x),
@@ -57,7 +57,7 @@ namespace BraceExpander.Tests
 		[Fact]
 		public void LeftToRightOrderIsPreserved()
 		{
-			var result = BraceExpander.Expand("a{d,c,b}e");
+			var result = Expander.Expand("a{d,c,b}e");
 
 			Assert.Collection(result,
 				x => Assert.Equal("ade", x),
