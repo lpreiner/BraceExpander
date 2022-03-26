@@ -121,7 +121,7 @@ namespace BraceExpander
 							if (level == 0)
 							{
 								var element = exp[elementStart..i];
-								if (elementStart == 0 || exp[elementStart-1] != '}')
+								if (elementStart == 0 || exp[elementStart - 1] != '}')
 									expansions.Add(element);
 								elementStart = i + 1;
 							}

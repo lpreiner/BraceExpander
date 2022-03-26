@@ -53,7 +53,7 @@ namespace BraceExpander.Tests
 		}
 
 		[Theory]
-		[InlineData("{2..-2}", "2","1","0","-1","-2")]
+		[InlineData("{2..-2}", "2", "1", "0", "-1", "-2")]
 		[InlineData("{-2..-1}", "-2", "-1")]
 		[InlineData("{-1..0}", "-1", "0")]
 		public void NegativeBounds(string expression, params object[] expectedResults)
