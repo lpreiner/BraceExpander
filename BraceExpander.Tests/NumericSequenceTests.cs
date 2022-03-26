@@ -20,7 +20,7 @@ namespace BraceExpander.Tests
 		[Theory]
 		[InlineData("{1..10..2}", 5)]
 		[InlineData("{1..1000..10}", 100)]
-		public void SequencesWithExplicityIncrementsHaveExpectedCounts(string expression, int expectedCount)
+		public void SequencesWithExplicitIncrementsHaveExpectedCounts(string expression, int expectedCount)
 		{
 			var results = BraceExpander.Expand(expression);
 
