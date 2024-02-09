@@ -27,6 +27,12 @@ namespace BraceExpander
 
 		public static IEnumerable<string> Expand(string expression)
 		{
+			if (expression is null)
+			{
+				yield return expression;
+				yield break;
+			}
+
 			var match = Expansions.Match(expression);
 			if (!match.Success)
 			{
@@ -34,7 +40,7 @@ namespace BraceExpander
 				yield break;
 			}
 
-			var exp = match.Groups.OfType<Group>().Where(g => g.Name == "exp").First()?.Value;
+			var exp = match.Groups.OfType<Group>().First(g => g.Name == "exp")?.Value;
 
 			var expansions = new List<string>();
 
