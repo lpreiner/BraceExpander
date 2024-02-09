@@ -102,7 +102,7 @@ namespace BraceExpander.Tests
 
 		#region Helpers
 
-		IEnumerable<int> GenerateRange(int start, int end, int increment)
+		static IEnumerable<int> GenerateRange(int start, int end, int increment)
 		{
 			if (start > end)
 				increment = -increment;

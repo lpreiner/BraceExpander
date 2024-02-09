@@ -11,6 +11,7 @@ namespace BraceExpander.Tests
 		[InlineData("asdf}")]
 		[InlineData("{asdf}")]
 		[InlineData("{12345}")]
+		[InlineData(null)]
 		public void SimpleInputHasSameOutput(string input)
 		{
 			var result = Expander.Expand(input);

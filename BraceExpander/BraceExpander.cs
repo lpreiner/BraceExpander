@@ -16,16 +16,23 @@ namespace BraceExpander
 		const int DEFAULT_INCREMENT = 1;
 		const string EXP = "exp";
 		const string PATTERN = @"{(?<" + EXP + @">(?>{(?<x>)|[^{}]+|}(?<-x>))*(?(x)(?!)))}";
-		static Regex Expansions = new Regex(PATTERN, RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+		static TimeSpan RegexTimeout = TimeSpan.FromSeconds(1);
+		static Regex Expansions = new Regex(PATTERN, RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled, RegexTimeout);
 
 		const string SEQUENCE_NUMERIC = @"^(?<start>-?\d+)\.\.(?<end>-?\d+)(\.\.(?<inc>-?\d+))?$";
-		static Regex SequenceNumeric = new Regex(SEQUENCE_NUMERIC, RegexOptions.Compiled);
+		static Regex SequenceNumeric = new Regex(SEQUENCE_NUMERIC, RegexOptions.Compiled, RegexTimeout);
 
 		const string SEQUENCE_ALPHA = @"^(?<start>[A-Za-z]?)\.\.(?<end>[A-Za-z]?)(\.\.(?<inc>-?\d+))?$";
-		static Regex SequenceAlpha = new Regex(SEQUENCE_ALPHA, RegexOptions.Compiled);
+		static Regex SequenceAlpha = new Regex(SEQUENCE_ALPHA, RegexOptions.Compiled, RegexTimeout);
 
 		public static IEnumerable<string> Expand(string expression)
 		{
+			if (expression is null)
+			{
+				yield return expression;
+				yield break;
+			}
+
 			var match = Expansions.Match(expression);
 			if (!match.Success)
 			{
@@ -33,7 +40,7 @@ namespace BraceExpander
 				yield break;
 			}
 
-			var exp = match.Groups.OfType<Group>().Where(g => g.Name == "exp").First()?.Value;
+			var exp = match.Groups.OfType<Group>().First(g => g.Name == "exp")?.Value;
 
 			var expansions = new List<string>();
 
