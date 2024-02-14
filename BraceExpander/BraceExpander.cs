@@ -113,16 +113,13 @@ namespace BraceExpander
 					switch (c)
 					{
 						case '{':
-							if (level == 0)
-								elementStart = i + 1;
 							level++;
 							break;
 						case '}':
 							{
-								level--;
-								if (level == 0)
+								if (--level == 0)
 								{
-									var element = $"{{{exp[(elementStart)..(i)]}}}";
+									var element = exp[(elementStart)..(i + 1)];
 									expansions.AddRange(Expand(element));
 									elementStart = i + 1;
 								}
@@ -152,7 +149,8 @@ namespace BraceExpander
 
 			foreach (var e in expansions)
 			{
-				var next = Expand(expression[(match.Index + match.Length)..]);
+				var nextExp = expression[(match.Index + match.Length)..];
+				var next = Expand(nextExp);
 				foreach (var n in next)
 					yield return expression[..match.Index] + e + n;
 			}

@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System;
+using System.Linq;
+using Xunit;
 
 namespace BraceExpander.Tests
 {
@@ -30,6 +32,19 @@ namespace BraceExpander.Tests
 				x => Assert.Equal("e", x),
 				x => Assert.Equal("f", x),
 				x => Assert.Equal("g", x));
+		}
+
+		[Theory]
+		[InlineData("a{,b}", "a", "ab")]
+		[InlineData("a{,b{,c}}", "a", "ab", "abc")]
+		[InlineData("a{,b{,c,},}", "a", "ab", "abc", "ab", "a")]
+		public void NestedMixedSetExpansion(string expression, params object[] expectedResults)
+		{
+			var results = Expander.Expand(expression);
+
+			Assert.Collection(results, expectedResults
+				.Select(x => (Action<string>)(y => Assert.Equal(x, y)))
+				.ToArray());
 		}
 
 		[Fact]
